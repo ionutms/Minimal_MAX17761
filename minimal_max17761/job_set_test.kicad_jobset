@@ -1,0 +1,77 @@
+{
+  "jobs": [
+    {
+      "description": "",
+      "id": "118a1340-2a36-4fea-9c1f-5aba967f95bd",
+      "settings": {
+        "board_only": false,
+        "board_outlines_chaining_epsilon": 0.01,
+        "cut_vias_in_body": false,
+        "description": "",
+        "export_board_body": true,
+        "export_components": true,
+        "export_inner_copper": false,
+        "export_pads": false,
+        "export_silkscreen": true,
+        "export_soldermask": true,
+        "export_tracks": false,
+        "export_zones": false,
+        "fill_all_vias": false,
+        "format": "brep",
+        "fuse_shapes": false,
+        "include_dnp": true,
+        "include_unspecified": true,
+        "occt_format": 1,
+        "optimize_step": true,
+        "output_filename": "minimal_max17761.glb",
+        "overwrite": false,
+        "subst_models": true,
+        "use_drill_origin": false,
+        "use_grid_origin": false,
+        "user_origin.x": 150.952,
+        "user_origin.y": 100.533,
+        "vrml_model_dir": "",
+        "vrml_relative_paths": false
+      },
+      "type": "pcb_export_3d"
+    },
+    {
+      "description": "",
+      "id": "0d180c59-2c5d-4202-8a61-cf7d054da09f",
+      "settings": {
+        "command": "kicad-cli pcb export vrml minimal_max17761.kicad_pcb",
+        "description": "",
+        "ignore_exit_code": false,
+        "output_filename": "0d180c59-2c5d-4202-8a61-cf7d054da09f.log",
+        "record_output": true
+      },
+      "type": "special_execute"
+    },
+    {
+      "description": "",
+      "id": "666a9229-1016-4608-bf9e-4582cae2b93b",
+      "settings": {
+        "command": "kicad-cli pcb render minimal_max17761.kicad_pcb -o minimal_max17761_side.jpg --background transparent --quality high --rotate '-45,0,45'",
+        "description": "",
+        "ignore_exit_code": false,
+        "output_filename": "666a9229-1016-4608-bf9e-4582cae2b93b.log",
+        "record_output": true
+      },
+      "type": "special_execute"
+    }
+  ],
+  "meta": {
+    "version": 1
+  },
+  "outputs": [
+    {
+      "description": "",
+      "id": "7c9a1224-64d0-4efe-8c1c-f04fa95e1382",
+      "only": [],
+      "settings": {
+        "output_path": "C:\\Users\\Mihai_Ionut\\Documents\\GitHub\\Minimal_MAX17761\\minimal_max17761\\"
+      },
+      "type": "folder"
+    }
+  ]
+}
