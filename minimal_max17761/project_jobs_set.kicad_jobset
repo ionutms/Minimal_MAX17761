@@ -4,7 +4,7 @@
       "description": "",
       "id": "bfc549be-30fc-46ec-aaa0-08e307505717",
       "settings": {
-        "command": "kicad-cli pcb export glb minimal_max17761.kicad_pcb -o docs\\3d_models\\minimal_max17761_side.glb --include-tracks --include-pads --include-zones --include-silkscreen --include-soldermask --fill-all-vias --cut-vias-in-body",
+        "command": "kicad-cli pcb export glb minimal_max17761.kicad_pcb -o docs\\3d_models\\minimal_max17761.glb --include-tracks --include-pads --include-zones --include-silkscreen --include-soldermask --fill-all-vias --cut-vias-in-body",
         "description": "",
         "ignore_exit_code": false,
         "output_filename": "export_glb.log",
@@ -16,7 +16,7 @@
       "description": "",
       "id": "0d180c59-2c5d-4202-8a61-cf7d054da09f",
       "settings": {
-        "command": "kicad-cli pcb export vrml minimal_max17761.kicad_pcb -o docs\\3d_models\\minimal_max17761_side.wrl",
+        "command": "kicad-cli pcb export vrml minimal_max17761.kicad_pcb -o docs\\3d_models\\minimal_max17761.wrl",
         "description": "",
         "ignore_exit_code": false,
         "output_filename": "export_wrl.log",
