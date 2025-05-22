@@ -8,7 +8,7 @@ jobs:
   generate-kicad-3d-models:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -59,19 +59,6 @@ jobs:
         run: |
           echo "No PCB file found. Cannot generate 3D models without PCB."
           exit 0
-
-      - name: Determine default branch
-        id: default-branch
-        run: |
-          DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
-          echo "default_branch=$DEFAULT_BRANCH" >> $GITHUB_OUTPUT
-          echo "Default branch is: $DEFAULT_BRANCH"
-
-      - name: Checkout default branch
-        run: |
-          DEFAULT_BRANCH="${{ steps.default-branch.outputs.default_branch }}"
-          git fetch origin $DEFAULT_BRANCH
-          git checkout $DEFAULT_BRANCH || git checkout -b $DEFAULT_BRANCH
 
       - name: Create 3D models output directory
         run: |
@@ -136,25 +123,19 @@ jobs:
           retention-days: 1
           if-no-files-found: warn
 
-      - name: Configure Git
+      - name: Trigger workflow in target repository
         if: steps.check-files.outputs.files_generated == 'true'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
-      - name: Commit and push 3D models
-        if: steps.check-files.outputs.files_generated == 'true'
-        run: |
-          PROJECT_NAME="${{ steps.find-files.outputs.project_name }}"
-          
-          git add "${PROJECT_NAME}/docs/3d_models"
-          
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            echo "Committing 3D models"
-            git commit -m "Add KiCad 3D models for ${PROJECT_NAME}"
-            
-            echo "Pushing to current branch"
-            git push origin HEAD || git push -u origin HEAD
-          fi
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.REPO_DISPATCH_TOKEN }}
+          repository: ionutms/Docker_3D_Models_Hosting
+          event-type: kicad-3d-models-ready
+          client-payload: |
+            {
+              "source_repo": "${{ github.repository }}",
+              "run_id": "${{ github.run_id }}",
+              "project_name": "${{ steps.find-files.outputs.project_name }}",
+              "artifact_name": "kicad-3d-models-${{ steps.find-files.outputs.project_name }}",
+              "ref": "${{ github.ref }}",
+              "sha": "${{ github.sha }}"
+            }
