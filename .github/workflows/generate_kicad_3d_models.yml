@@ -1,4 +1,4 @@
-name: Generate KiCad Documentation
+name: Generate KiCad 3D Models
 on:
   push:
     branches: [ 3d_models_generation ]
